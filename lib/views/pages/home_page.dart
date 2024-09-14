@@ -38,8 +38,6 @@ class _HomePageState extends State<HomePage>
               padding: const EdgeInsets.only(
                   left: 14, right: 14, top: 20, bottom: 20),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,7 +124,7 @@ class _HomePageState extends State<HomePage>
                       ),
                     ],
                   ),
-                  // SizedBox(height: 5),
+                  SizedBox(height: 5),
                   TabBar(
                     controller: _tabController,
                     tabs: const [

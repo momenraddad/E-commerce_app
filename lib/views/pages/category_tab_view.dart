@@ -24,9 +24,7 @@ class GategoryPage extends StatelessWidget {
           children: [
             SizedBox(
               width: size.width,
-              // height: 400,
               child: BlocBuilder<CategoryCubit, CategoryState>(
-                // bloc: BlocProvider.of<CategoryCubit>(context),
                 builder: (context, state) {
                   if (state is CategoryLoading) {
                     return const Center(
@@ -44,11 +42,9 @@ class GategoryPage extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1, // Number of items in a row
-                          // crossAxisSpacing: 5,
+                          crossAxisCount: 1,
                           mainAxisSpacing: 6,
-                          childAspectRatio:
-                              3, // Adjust the aspect ratio as needed
+                          childAspectRatio: 3,
                         ),
                         itemBuilder: (BuildContext context, int index) {
                           CategoryItem category = state.categoryList[index];
@@ -84,9 +80,8 @@ class GategoryPage extends StatelessWidget {
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        // استخدام Column لاحتواء أكثر من عنصر
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .center, // تنظيم العناصر داخل الـ Column
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Text(
                                             category.category,
@@ -96,8 +91,7 @@ class GategoryPage extends StatelessWidget {
                                             ),
                                           ),
                                           Text(
-                                            category.amountProduct +
-                                                "products", // يمكنك تعديل النص هنا إذا أردت
+                                            category.amountProduct + "products",
                                             style: const TextStyle(
                                               fontSize: 15,
                                               fontWeight: FontWeight.w500,

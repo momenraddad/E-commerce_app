@@ -3,7 +3,6 @@ import 'package:ecommerce_app/models/product_item_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'home_state.dart';
 
-// in this class add the functions will be used
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
   void getHomeDate() {

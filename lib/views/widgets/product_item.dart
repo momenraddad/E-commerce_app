@@ -19,7 +19,6 @@ class _ProductItemState extends State<ProductItem> {
         borderRadius: BorderRadius.circular(7),
       ),
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Stack(alignment: AlignmentDirectional.topEnd, children: [
             ClipRRect(

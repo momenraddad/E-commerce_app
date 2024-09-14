@@ -25,9 +25,6 @@ class _HomeSliderWidgetState extends State<HomeSliderWidget> {
             viewportFraction: 1,
             padEnds: false,
             disableCenter: true,
-            // autoPlay: true,
-            // autoPlayInterval:
-            //     const Duration(milliseconds: 700),
             onPageChanged: (index, reason) {
               setState(() {
                 _current = index;

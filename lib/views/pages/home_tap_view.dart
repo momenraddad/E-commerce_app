@@ -65,11 +65,8 @@ class _HomeTapState extends State<HomeTap> {
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // Number of items in a row
-                      // crossAxisSpacing: 5,
-                      // mainAxisSpacing: 10.0,
-                      childAspectRatio:
-                          0.6, // Adjust the aspect ratio as needed
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.6,
                     ),
                     itemCount: products.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -94,7 +91,6 @@ class _HomeTapState extends State<HomeTap> {
           );
         }
       },
-    ) // Replace with the actual page widget for the Category tab
-        ;
+    );
   }
 }

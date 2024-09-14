@@ -3,8 +3,6 @@ import 'package:ecommerce_app/view_models/search_cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Flutter code sample for [SearchBar].
-
 class SearchBarApp extends StatefulWidget {
   const SearchBarApp({super.key});
 
@@ -120,8 +118,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
                           const SizedBox(height: 10),
                           Container(
                             margin: const EdgeInsets.all(1),
-                            width: size.width *
-                                0.9, // Adjust this to give more space
+                            width: size.width * 0.9,
                             child: state.lastSearch != null &&
                                     state.lastSearch!.isNotEmpty
                                 ? Wrap(
@@ -130,8 +127,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
                                     children: state.lastSearch!.map((item) {
                                       return Container(
                                         constraints: BoxConstraints(
-                                          maxWidth: size.width *
-                                              0.5, // Allow more space for text to wrap
+                                          maxWidth: size.width * 0.5,
                                         ),
                                         child: Chip(
                                           shape: RoundedRectangleBorder(
@@ -150,9 +146,8 @@ class _SearchBarAppState extends State<SearchBarApp> {
                                               fontSize: 17,
                                               color: Color(0xffB4B6BC),
                                             ),
-                                            overflow: TextOverflow
-                                                .visible, // Ensure the text wraps
-                                            softWrap: true, // Enable wrapping
+                                            overflow: TextOverflow.visible,
+                                            softWrap: true,
                                           ),
                                           onDeleted: () {
                                             BlocProvider.of<SearchCubit>(
@@ -164,8 +159,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
                                     }).toList(),
                                   )
                                 : const Center(
-                                    child: Text(
-                                        "No search history")), // Display a fallback if no last search
+                                    child: Text("No search history")),
                           ),
                           const SizedBox(height: 10),
                           Column(
@@ -192,17 +186,12 @@ class _SearchBarAppState extends State<SearchBarApp> {
                                   padding: const EdgeInsets.all(0),
                                   shrinkWrap: true,
                                   itemCount: state.PopularSearch!.length,
-                                  // itemCount: 4,
                                   physics: const NeverScrollableScrollPhysics(),
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                     mainAxisSpacing: 10,
-                                    crossAxisCount:
-                                        1, // Number of items in a row
-                                    // crossAxisSpacing: 5,
-                                    // mainAxisSpacing: 10.0,
-                                    childAspectRatio:
-                                        3.8, // Adjust the aspect ratio as needed
+                                    crossAxisCount: 1,
+                                    childAspectRatio: 3.8,
                                   ),
                                   itemBuilder:
                                       (BuildContext context, int index) {
@@ -211,7 +200,6 @@ class _SearchBarAppState extends State<SearchBarApp> {
                                     Color textColor;
                                     final status = product.rating;
 
-                                    // تحديد اللون بناءً على الحالة
                                     if (status == "Hot") {
                                       backgroundColor =
                                           Colors.red.withOpacity(0.2);
@@ -234,7 +222,6 @@ class _SearchBarAppState extends State<SearchBarApp> {
                                         state.PopularSearch!.length.toString());
 
                                     return Card(
-                                      // color: Color.fromRGBO(254, 247, 255, 1),
                                       color: Colors.transparent,
                                       elevation: 0,
                                       child: Row(
@@ -272,7 +259,6 @@ class _SearchBarAppState extends State<SearchBarApp> {
                                                 ),
                                               ),
                                               Text(
-                                                // ignore: prefer_interpolation_to_compose_strings
                                                 product.searchTod +
                                                     " Search  today ",
                                                 style: const TextStyle(
@@ -308,41 +294,6 @@ class _SearchBarAppState extends State<SearchBarApp> {
                               )
                             ],
                           )
-
-                          //   Expanded(
-                          //     child: GridView.builder(
-                          //       itemCount: state.product?.length,
-                          //       gridDelegate:
-                          //           const SliverGridDelegateWithFixedCrossAxisCount(
-                          //         crossAxisCount: 2,
-                          //         childAspectRatio: 0.6,
-                          //       ),
-                          //       itemBuilder: (BuildContext context, int index) {
-                          //         return Card(
-                          //           child: Row(
-                          //             children: [
-                          //               CachedNetworkImage(
-                          //                 height: 100,
-                          //                 width: 100,
-                          //                 imageUrl: state
-                          //                         .product?[index].imageUrl ??
-                          //                     '', // Provide a valid image URL or fallback
-                          //               ),
-                          //               Column(
-                          //                 children: [
-                          //                   Text(state.product?[index].name ??
-                          //                       'No Name'),
-                          //                   Text(state.product?[index].searchTod ??
-                          //                       'No Info'),
-                          //                 ],
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         );
-                          //       },
-                          //     ),
-                          //   ),
-                          //
                         ],
                       );
                     } else {

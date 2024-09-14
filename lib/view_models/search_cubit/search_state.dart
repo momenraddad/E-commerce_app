@@ -75,34 +75,3 @@ List<SearchState> lastSearchReady = [
     name: "Long shirt  ",
   ),
 ];
-    //  GridView.builder(
-    //                           shrinkWrap: true,
-    //                           gridDelegate:
-    //                               const SliverGridDelegateWithFixedCrossAxisCount(
-    //                             crossAxisCount: 1, // Number of items in a row
-    //                             childAspectRatio:
-    //                                 0.6, // Adjust the aspect ratio as needed
-    //                           ),
-    //                           itemBuilder: (BuildContext context, int index) {
-    //                             try {
-    //                               return Card(
-    //                                 child: Row(
-    //                                   children: [
-    //                                     CachedNetworkImage(
-    //                                         imageUrl: state.imageUrl),
-    //                                     Column(
-    //                                       children: [
-    //                                         Text(state.name),
-    //                                         Text(state.searchTod),
-    //                                       ], 
-    //                                     ),
-    //                                   ],
-    //                                 ),
-    //                               );
-    //                             } catch (e) {
-    //                               debugPrint("Error: $e");
-    //                               return const SizedBox();
-    //                             }
-    //                           },
-    //                         ),
-    //                       the error in this code becuse when ignore this code the program is run 

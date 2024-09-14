@@ -321,7 +321,6 @@ class ProductDetailsPage extends StatelessWidget {
                                     Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(35),
-                                        // shape: BoxShape.circle,
                                         color: const Color(0xFF514EB7),
                                       ),
                                       padding: const EdgeInsets.symmetric(

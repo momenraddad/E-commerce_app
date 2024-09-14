@@ -6,7 +6,6 @@ class CounterCubit extends Cubit<int> {
   void increment() => emit(state + 1);
   void decrement() {
     if (state > 1) {
-      // لا يسمح للعداد بالوصول إلى أقل من 1
       emit(state - 1);
     }
   }

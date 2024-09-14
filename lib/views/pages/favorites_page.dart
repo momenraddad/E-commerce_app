@@ -5,6 +5,8 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text("i am in FavoritesPage ")));
+    return SafeArea(
+        child: const Scaffold(
+            body: Center(child: Text("i am in FavoritesPage "))));
   }
 }
