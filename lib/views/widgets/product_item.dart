@@ -1,10 +1,17 @@
 import 'package:ecommerce_app/models/product_item_model.dart';
+import 'package:ecommerce_app/view_models/home_cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductItem extends StatefulWidget {
-  const ProductItem({super.key, required this.products});
+  const ProductItem(
+      {super.key,
+      required this.products,
+      required this.index,
+      required this.state});
   final ProductItemModel products;
-
+  final String index;
+  final HomeState state;
   @override
   State<ProductItem> createState() => _ProductItemState();
 }
@@ -40,18 +47,43 @@ class _ProductItemState extends State<ProductItem> {
                 decoration: BoxDecoration(
                     color: Colors.white24,
                     borderRadius: BorderRadius.circular(50)),
-                child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.products.isFavorite =
-                            !widget.products.isFavorite;
-                        print(
-                            "   ${widget.products.id} :${widget.products.isFavorite} ");
-                      });
-                    },
-                    icon: widget.products.isFavorite
-                        ? const Icon(Icons.favorite)
-                        : const Icon(Icons.favorite_border)),
+                child: BlocBuilder<HomeCubit, HomeState>(
+                  builder: (context, state) {
+                    context
+                        .read<HomeCubit>()
+                        .changedState(state, widget.index as String);
+
+                    print("changed state iam in  ${state}");
+                    print("changed widget.state iam in  ${widget.state}");
+
+                    if (state == widget.state) {
+                      final product = context
+                          .read<HomeCubit>()
+                          .getProductById(widget.index);
+                      print("changed state iam in  if  ${state}");
+
+                      return IconButton(
+                        onPressed: () {
+                          product.isFavorite = !product.isFavorite;
+
+                          print("${product.id} : ${product.isFavorite}");
+                          context
+                              .read<HomeCubit>()
+                              .changedState(state, widget.index);
+                        },
+                        icon: product.isFavorite
+                            ? const Icon(Icons.favorite)
+                            : const Icon(Icons.favorite_border),
+                      );
+                    } else {
+                      print("changed state iam in else  ${state}");
+                      print("changed widget.state iam in else ${widget.state}");
+                      return Center(
+                        child: Text("data"),
+                      );
+                    }
+                  },
+                ),
               ),
             )
           ]),

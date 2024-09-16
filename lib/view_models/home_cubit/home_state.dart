@@ -21,3 +21,11 @@ final class HomeError extends HomeState {
 
   const HomeError({required this.message});
 }
+
+final class FavoritesLoaded extends HomeState {
+  final List<ProductItemModel> productsF;
+
+  const FavoritesLoaded({required this.productsF});
+}
+
+final class FavoritesLoading extends HomeState {}

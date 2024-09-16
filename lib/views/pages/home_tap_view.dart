@@ -20,77 +20,92 @@ class _HomeTapState extends State<HomeTap> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return BlocBuilder<HomeCubit, HomeState>(
-      bloc: BlocProvider.of<HomeCubit>(context),
-      builder: (context, state) {
-        if (state is HomeLoading) {
-          return const Center(child: CircularProgressIndicator.adaptive());
-        } else if (state is HomeError) {
-          return Center(
-            child: Text(state.message),
-          );
-        } else if (state is HomeLoaded) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  HomeSliderWidget(imageList: state.slider),
-                  SizedBox(
-                    height: size.height * 0.02,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Text(
-                            "New Arrivals 🔥  ",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                          const Spacer(),
-                          TextButton(
-                              onPressed: () {}, child: const Text(" See All"))
-                        ],
-                      )
-                    ],
-                  ),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.6,
+    return BlocProvider(
+      create: (context) {
+        final cubit = HomeCubit();
+        cubit.getHomeDate();
+        return cubit;
+      },
+      child: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          if (state is HomeLoading) {
+            return const Center(child: CircularProgressIndicator.adaptive());
+          } else if (state is HomeError) {
+            return Center(
+              child: Text(state.message),
+            );
+          } else if (state is HomeLoaded) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HomeSliderWidget(imageList: state.slider),
+                    SizedBox(
+                      height: size.height * 0.02,
                     ),
-                    itemCount: products.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const Text(
+                              "New Arrivals 🔥  ",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            const Spacer(),
+                            TextButton(
+                                onPressed: () {}, child: const Text(" See All"))
+                          ],
+                        )
+                      ],
+                    ),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.6,
+                      ),
+                      itemCount: products.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
                           onTap: () {
+                            print(
+                                "the value id in home tap ${state.products[index].id}");
+                            print(
+                                "the value is favorite in home tap ${state.products[index].isFavorite} ");
+                            print(state.products[index].isFavorite);
                             Navigator.of(context, rootNavigator: true)
                                 .pushNamed(
                               AppRoutes.prouductDetails,
-                              arguments: index,
+                              arguments: state.products[index].id,
                             );
                           },
-                          child: ProductItem(products: state.products[index]));
-                    },
-                  )
-                ],
+                          child: ProductItem(
+                              products: state.products[index],
+                              index: state.products[index].id,
+                              state: state),
+                        );
+                      },
+                    )
+                  ],
+                ),
               ),
-            ),
-          );
-        } else {
-          return const Center(
-            child: Text(" NoThing"),
-          );
-        }
-      },
+            );
+          } else {
+            return const Center(
+              child: Text(" NoThing"),
+            );
+          }
+        },
+      ),
     );
   }
 }

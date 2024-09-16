@@ -25,20 +25,14 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
 
   List<Widget> _buildscreens() {
     return [
-      BlocProvider(
-        create: (context) {
-          final cubit = HomeCubit();
-          cubit.getHomeDate();
-          return cubit;
-        },
-        child: const HomePage(),
-      ),
+      const HomePage(),
       const CartPage(),
       const FavoritesPage(),
       const ProfilePage(),
     ];
   }
 
+  @override
   Widget build(BuildContext context) {
     return PersistentTabView(
       controller: _controller,
@@ -54,14 +48,14 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
           screen: _buildscreens()[1],
           item: ItemConfig(
             icon: const Icon(Icons.shopping_cart),
-            title: " cart",
+            title: "Cart",
           ),
         ),
         PersistentTabConfig(
           screen: _buildscreens()[2],
           item: ItemConfig(
             icon: const Icon(Icons.favorite),
-            title: " Favorite",
+            title: "Favorite",
           ),
         ),
         PersistentTabConfig(
@@ -70,7 +64,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
             icon: const Icon(Icons.person_rounded),
             title: "Profile",
           ),
-        )
+        ),
       ],
       navBarBuilder: (navBarConfig) => Style1BottomNavBar(
         navBarConfig: navBarConfig,

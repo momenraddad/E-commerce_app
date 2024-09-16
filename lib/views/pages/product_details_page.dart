@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/view_models/Counter_cubit/cubit/counter_cubit.dart';
 import 'package:ecommerce_app/view_models/Size_cubit/cubit/size_cubit.dart';
 import 'package:ecommerce_app/view_models/home_cubit/home_cubit.dart';
-import 'package:ecommerce_app/views/pages/favorites_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,7 +43,7 @@ class ProductDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int index = ModalRoute.of(context)!.settings.arguments as int;
+    final index = ModalRoute.of(context)!.settings.arguments;
     final size = MediaQuery.of(context).size;
 
     return MultiBlocProvider(
@@ -52,6 +51,7 @@ class ProductDetailsPage extends StatelessWidget {
         BlocProvider(
           create: (context) {
             final cubit = HomeCubit();
+            cubit.getHomeDate();
             cubit.getProductById(index);
             return cubit;
           },
@@ -66,7 +66,8 @@ class ProductDetailsPage extends StatelessWidget {
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           if (state is HomeLoaded) {
-            final product = state.products[index];
+            final products = context.read<HomeCubit>().getProductById(index);
+            final product = products;
             bool favorite = product.isFavorite;
             return SafeArea(
               child: Scaffold(
@@ -95,11 +96,13 @@ class ProductDetailsPage extends StatelessWidget {
                                   print(product.isFavorite);
                                   print("value of :");
 
-                                  print(state.products[index].isFavorite);
+                                  print(product.isFavorite);
                                   product.isFavorite = !product.isFavorite;
                                   favorite = product.isFavorite;
                                   print(product.isFavorite);
-                                  context.read<HomeCubit>().changedState();
+                                  context
+                                      .read<HomeCubit>()
+                                      .changedState(state, index as String);
                                 },
                                 icon: Icon(product.isFavorite == false
                                     ? Icons.favorite_outline
@@ -363,7 +366,9 @@ class ProductDetailsPage extends StatelessWidget {
           } else if (state is HomeError) {
             return Center(child: Text(state.message));
           } else {
-            return const Center(child: Text("No product found"));
+            return Scaffold(
+                appBar: AppBar(),
+                body: const Center(child: Text("No product found")));
           }
         },
       ),

@@ -94,13 +94,11 @@ class _HomePageState extends State<HomePage>
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          SearchBarApp(), // تأكد من أن SearchBarApp هو Widget صالح
+                                      builder: (context) => SearchBarApp(),
                                     ),
                                   );
                                 } catch (e) {
-                                  print(
-                                      'Error: $e'); // طباعة أي خطأ يتم التقاطه
+                                  print('Error: $e');
                                 }
                               },
                             ),
@@ -113,8 +111,7 @@ class _HomePageState extends State<HomePage>
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        ProductDetailsPage(), // تأكد من أن SearchBarApp هو Widget صالح
+                                    builder: (context) => ProductDetailsPage(),
                                   ),
                                 );
                               },
